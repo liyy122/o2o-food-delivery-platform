@@ -136,13 +136,13 @@ java -jar sky-server/target/sky-server-1.0-SNAPSHOT.jar
    - 真机预览：`http://电脑局域网IP:8080`（手机和电脑要在同一个 Wi-Fi）
 3. 开发者工具右上角「详情 → 本地设置」勾选 **不校验合法域名、web-view（业务域名）、TLS 版本以及 HTTPS 证书**；
 4. 编译运行。小程序登录需要自己的小程序 AppID 和 AppSecret，并填到后端的 `sky.wechat.appid / secret` 里。
+   导入后如果开发者工具提示 AppID 不匹配，把 `project.config.json` 里的 `appid` 换成自己的即可。
 
 ## 默认账号
 
 | 端 | 账号 | 密码 |
 | --- | --- | --- |
 | 管理端 | admin | 123456 |
-| 管理端 | xiaozhi | 123456（演示数据里已移除，可自行新增） |
 | 小程序 | 微信授权登录 | — |
 
 ## 常见问题
