@@ -25,6 +25,13 @@ public interface ShoppingCartMapper {
     void updateNumberById(ShoppingCart shoppingCart);
 
     /**
+     * 根据id删除购物车数据
+     * @param id
+     */
+    @Delete("delete from shopping_cart where id = #{id}")
+    void deleteById(Long id);
+
+    /**
      * 插入购物车数据
      * @param shoppingCart
      */
