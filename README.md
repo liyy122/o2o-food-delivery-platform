@@ -43,7 +43,8 @@ sky-take-out-learning/
 ├── database/
 │   └── sky_take_out.sql        建库建表 + 演示数据（管理员 admin / 123456）
 ├── frontend/
-│   ├── admin/                  管理端打包产物（Vue 编译后的静态文件）
+│   ├── admin/                  管理端打包产物（Vue 编译后的静态文件，可直接部署）
+│   ├── admin-source/           管理端 Vue2 + TypeScript 源码（可改页面后重新构建）
 │   ├── nginx.conf              管理端 Nginx 配置示例（监听 8081）
 │   └── miniprogram/            用户端微信小程序源码
 ├── docs/
@@ -142,6 +143,17 @@ java -jar sky-server/target/sky-server-1.0-SNAPSHOT.jar
 
 > 配置里监听的是 **8081**，避免和系统 80 端口冲突；如果 8081 被占用，改 `listen` 后同步调整访问地址。
 
+**想改管理端页面/样式？** 源码在 `frontend/admin-source/`（Vue 2 + TypeScript + Element UI）：
+
+```bash
+cd frontend/admin-source
+npm install
+npm run serve     # 本地开发，http://localhost:8888
+npm run build     # 构建，产物在 dist/
+```
+
+把 `dist/` 里的文件覆盖到 `frontend/admin/`，再刷新页面即可。需要 Node 16（不要用 18+，vue-cli 3 会报 OpenSSL 错误）。
+
 ### 5. 运行小程序
 
 1. 用微信开发者工具导入 `frontend/miniprogram`；
@@ -149,8 +161,9 @@ java -jar sky-server/target/sky-server-1.0-SNAPSHOT.jar
    - 模拟器调试：`http://localhost:8080`
    - 真机预览：`http://电脑局域网IP:8080`（手机和电脑要在同一个 Wi-Fi）
 3. 开发者工具右上角「详情 → 本地设置」勾选 **不校验合法域名、web-view（业务域名）、TLS 版本以及 HTTPS 证书**；
-4. 编译运行。小程序登录需要自己的小程序 AppID 和 AppSecret，并填到后端的 `sky.wechat.appid / secret` 里。
-   导入后如果开发者工具提示 AppID 不匹配，把 `project.config.json` 里的 `appid` 换成自己的即可。
+4. 编译运行。`project.config.json` 里默认是 `touristappid`（游客模式，能打开但登录不了）；
+   要看登录/支付，把它换成自己的小程序 AppID，并把 AppID / AppSecret 填到后端 `sky.wechat.appid / secret`。
+   微信公众平台注册小程序后，在「开发管理 → 开发设置」里可以拿到 AppID 和 AppSecret。
 
 ## 默认账号
 
@@ -161,9 +174,9 @@ java -jar sky-server/target/sky-server-1.0-SNAPSHOT.jar
 
 ## 常见问题
 
-**菜品/套餐图片显示 403 或空白**
-演示数据里的图片地址来自课程早期的阿里云 OSS，可能已经失效。这属于图片资源问题，不影响功能；
-在管理端「菜品管理」里重新上传图片即可（需要配置自己的 `sky.alioss`）。
+**菜品/套餐图片显示不出来**
+演示图片已经放在后端的 `sky-server/src/main/resources/static/demo/`，数据库里存的是 `http://localhost:8080/demo/xxx.png`。
+如果你用手机或局域网访问，需要把数据库里的 `localhost` 换成电脑的局域网 IP（管理端页面和图片都走这个地址）。
 
 **Redis 连不上 / 报连接异常**
 先启动 Redis；Windows 上如果没有 Redis，可以装 Memurai（兼容 Redis 协议）。店铺营业状态、菜品缓存相关接口必须依赖它。
@@ -183,4 +196,5 @@ java -jar sky-server/target/sky-server-1.0-SNAPSHOT.jar
 ## 说明
 
 - 本项目仅用于学习交流，课程原始资料版权归黑马程序员所有。
+- 管理端源码 `frontend/admin-source/` 来自 [project-sky-admin-vue-ts](https://github.com/HeFeng-Lab/project-sky-admin-vue-ts)（MIT License），是课程配套的管理端代码。
 - 数据库脚本已去除本地测试产生的用户、订单、地址等数据，只保留演示所需的基础数据。
