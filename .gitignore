@@ -1,6 +1,24 @@
+# ---------- Maven / Java ----------
 **/target/
-.idea
-*.iml
 *.class
+
+# ---------- IDE ----------
+.idea/
+*.iml
+.vscode/
+
+# ---------- 测试 ----------
 *Test.java
 **/test/
+
+# ---------- 本地配置（含数据库密码、OSS/微信密钥，禁止提交） ----------
+sky-server/src/main/resources/application-dev.yml
+sky-server/src/main/resources/application-local.yml
+
+# ---------- 日志 ----------
+*.log
+logs/
+
+# ---------- 前端 ----------
+node_modules/
+frontend/admin/**/*.map

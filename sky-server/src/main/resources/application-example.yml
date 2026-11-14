@@ -1,0 +1,39 @@
+# ============================================================
+#  配置模板
+#  使用方法：复制本文件为 application-dev.yml，按自己的环境改完再启动。
+#  注意：application-dev.yml 里有数据库密码，已加入 .gitignore，不要提交。
+# ============================================================
+
+sky:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    host: localhost
+    port: 3306
+    database: sky_take_out          # 导入 database/sky_take_out.sql 后默认就是这个名字
+    username: root
+    password: 你的数据库密码
+
+  redis:
+    host: localhost
+    port: 6379
+    password: ""                    # 本地 Redis 一般没有密码
+    database: 0
+
+  # 以下两项只有上传图片 / 微信登录支付时才需要，
+  # 本地只调试后台接口可以先随便填，不影响启动。
+  alioss:
+    endpoint: https://oss-cn-beijing.aliyuncs.com
+    access-key-id: your-access-key-id
+    access-key-secret: your-access-key-secret
+    bucket-name: your-bucket-name
+
+  wechat:
+    appid: your-appid
+    secret: your-secret
+    mchid: your-mchid
+    mchSerialNo: your-mch-serial-no
+    privateKeyFilePath: C:/path/to/apiclient_key.pem
+    apiV3Key: your-api-v3-key
+    weChatPayCertFilePath: C:/path/to/wechatpay_cert.pem
+    notifyUrl: https://your-domain.com/pay/notify
+    refundNotifyUrl: https://your-domain.com/pay/refundNotify
