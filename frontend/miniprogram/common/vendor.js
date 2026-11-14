@@ -4285,51 +4285,29 @@ var _index = __webpack_require__(/*! ../../utils/index.js */ 29);function _inter
       this.getShopInfo();
       this.selectHeight = res.height;
       if (this.token() === '') {
-        uni.showModal({
-          title: '温馨提示',
-          content: '授权微信登录后才能点餐！',
-          showCancel: false,
-          success: function success(res) {
-            if (res.confirm) {
-              var jsCode = '';
-              uni.login({
-                provider: 'weixin',
-                success: function success(loginRes) {
-                  if (loginRes.errMsg === 'login:ok') {
-                    console.log('-=-=-=-=loginRes-=-=-=', loginRes);
-                    jsCode = loginRes.code;
-                  }
-                } });
-
-              // 授权
-              uni.getUserProfile({
-                desc: '登录',
-                success: function success(userInfo) {
-                  _this.setBaseUserInfo(userInfo.userInfo);
-                  var params = {
-                    // phone: jsCode,
-                    // avatar: userInfo.userInfo.avatarUrl,
-                    // name: userInfo.userInfo.nickName,
-                    // sex: userInfo.userInfo.gender,
-                    code: jsCode };
-
-                  console.log(userInfo.userInfo, 11);
-                  (0, _api.userLogin)(params).then(function (success) {
-                    if (success.code === 1) {
-
-                      _this.setToken(success.data.token);
-                      _this.init();
-                    }
-                  }).catch(function (err) {});
-                },
-                fail: function fail(err) {
-
-                } });
-
-            }
-          } });
-
+  uni.login({
+    provider: 'weixin',
+    success: function success(loginRes) {
+      if (loginRes.errMsg !== 'login:ok') {
+        uni.showToast({ title: '微信登录失败', icon: 'none' });
+        return;
       }
+      (0, _api.userLogin)({ code: loginRes.code }).then(function (r) {
+        if (r.code === 1) {
+          _this.setToken(r.data.token);
+          _this.init();
+        } else {
+          uni.showToast({ title: r.msg || '登录失败', icon: 'none' });
+        }
+      }).catch(function () {
+        uni.showToast({ title: '登录失败', icon: 'none' });
+      });
+    },
+    fail: function fail() {
+      uni.showToast({ title: '微信登录失败', icon: 'none' });
+    }
+  });
+}
 
     },
 
