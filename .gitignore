@@ -22,3 +22,6 @@ logs/
 # ---------- 前端 ----------
 node_modules/
 frontend/admin/**/*.map
+
+# 微信开发者工具的本地私有配置（含本机设置，不提交）
+frontend/miniprogram/project.private.config.json
