@@ -25,6 +25,7 @@
 | --- | --- |
 | [docs/API.md](docs/API.md) | 71 个接口清单（管理端 / 用户端 / 支付回调），与代码同步 |
 | [docs/数据库设计.md](docs/数据库设计.md) | 11 张表的字段说明、表关联、订单状态、Redis 键 |
+| [docs/sky-take-out.postman_collection.json](docs/sky-take-out.postman_collection.json) | Postman 集合，登录后自动保存 token |
 | 在线接口文档 | 启动后访问 `http://localhost:8080/doc.html`（Knife4j，可直接调试） |
 
 ## 目录结构
@@ -82,10 +83,10 @@ sky-take-out-learning/
 
 ## 环境要求
 
-- JDK 8 或 11（Spring Boot 2.7，不建议用 17+）
+- JDK 21（推荐，已在 21.0.9 上完整跑通）；JDK 8 / 11 同样可用，编译目标仍是 1.8
 - Maven 3.6+
 - MySQL 8.0
-- Redis 5.0+（店铺营业状态、菜品缓存会用到）
+- Redis 5.0+（店铺营业状态、菜品缓存会用到；Windows 上也可以用 Memurai）
 - Nginx 1.20+（Windows 版即可，只用于托管管理端静态页面）
 
 ## 快速开始
@@ -164,8 +165,11 @@ java -jar sky-server/target/sky-server-1.0-SNAPSHOT.jar
 演示数据里的图片地址来自课程早期的阿里云 OSS，可能已经失效。这属于图片资源问题，不影响功能；
 在管理端「菜品管理」里重新上传图片即可（需要配置自己的 `sky.alioss`）。
 
-**启动报 Redis 连接失败**
-先启动本地 Redis；如果暂时不用缓存相关功能，也必须保证 Redis 可连接，否则店铺状态、菜品缓存接口会报错。
+**Redis 连不上 / 报连接异常**
+先启动 Redis；Windows 上如果没有 Redis，可以装 Memurai（兼容 Redis 协议）。店铺营业状态、菜品缓存相关接口必须依赖它。
+
+**IDEA 编译报 Lombok 错误**
+项目使用 Lombok 1.18.34，支持 JDK 21。IDEA 需要开启 `Settings → Build → Compiler → Annotation Processors → Enable annotation processing`，并安装 Lombok 插件。
 
 **管理端打开是空白页 / 接口 404**
 检查 Nginx 是否把 `frontend/admin` 放到了 `html/sky` 下，以及 `nginx.conf` 里的 `root html/sky` 和 `/api/` 代理是否指向 `http://localhost:8080/admin/`。

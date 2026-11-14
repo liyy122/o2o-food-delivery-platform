@@ -1,0 +1,191 @@
+{
+  "info": {
+    "name": "苍穹外卖 API",
+    "description": "苍穹外卖接口调试集合。先执行「管理端 / 员工登录」，脚本会自动把 token 写入集合变量；用户端接口需要从微信登录获取 token，手动填到 userToken 变量。",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:8080" },
+    { "key": "adminToken", "value": "" },
+    { "key": "userToken", "value": "" }
+  ],
+  "item": [
+    {
+      "name": "管理端",
+      "item": [
+        {
+          "name": "员工登录",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "var json = pm.response.json();",
+                  "if (json.code === 1) { pm.collectionVariables.set('adminToken', json.data.token); }",
+                  "pm.test('登录成功', function () { pm.expect(json.code).to.eql(1); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"admin\",\n  \"password\": \"123456\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/admin/employee/login",
+              "host": ["{{baseUrl}}"],
+              "path": ["admin", "employee", "login"]
+            }
+          }
+        },
+        {
+          "name": "分类列表",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "token", "value": "{{adminToken}}" }],
+            "url": {
+              "raw": "{{baseUrl}}/admin/category/list?type=1",
+              "host": ["{{baseUrl}}"],
+              "path": ["admin", "category", "list"],
+              "query": [{ "key": "type", "value": "1" }]
+            }
+          }
+        },
+        {
+          "name": "菜品分页",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "token", "value": "{{adminToken}}" }],
+            "url": {
+              "raw": "{{baseUrl}}/admin/dish/page?page=1&pageSize=10",
+              "host": ["{{baseUrl}}"],
+              "path": ["admin", "dish", "page"],
+              "query": [
+                { "key": "page", "value": "1" },
+                { "key": "pageSize", "value": "10" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "订单搜索",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "token", "value": "{{adminToken}}" }],
+            "url": {
+              "raw": "{{baseUrl}}/admin/order/conditionSearch?page=1&pageSize=10",
+              "host": ["{{baseUrl}}"],
+              "path": ["admin", "order", "conditionSearch"],
+              "query": [
+                { "key": "page", "value": "1" },
+                { "key": "pageSize", "value": "10" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "工作台今日数据",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "token", "value": "{{adminToken}}" }],
+            "url": {
+              "raw": "{{baseUrl}}/admin/workspace/businessData",
+              "host": ["{{baseUrl}}"],
+              "path": ["admin", "workspace", "businessData"]
+            }
+          }
+        },
+        {
+          "name": "设置店铺营业状态",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "token", "value": "{{adminToken}}" }],
+            "url": {
+              "raw": "{{baseUrl}}/admin/shop/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["admin", "shop", "1"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "用户端",
+      "item": [
+        {
+          "name": "店铺营业状态（免登录）",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/user/shop/status",
+              "host": ["{{baseUrl}}"],
+              "path": ["user", "shop", "status"]
+            }
+          }
+        },
+        {
+          "name": "菜品列表",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "authentication", "value": "{{userToken}}" }],
+            "url": {
+              "raw": "{{baseUrl}}/user/dish/list?categoryId=11",
+              "host": ["{{baseUrl}}"],
+              "path": ["user", "dish", "list"],
+              "query": [{ "key": "categoryId", "value": "11" }]
+            }
+          }
+        },
+        {
+          "name": "添加购物车",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "authentication", "value": "{{userToken}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": { "mode": "raw", "raw": "{\n  \"dishId\": 46\n}" },
+            "url": {
+              "raw": "{{baseUrl}}/user/shoppingCart/add",
+              "host": ["{{baseUrl}}"],
+              "path": ["user", "shoppingCart", "add"]
+            }
+          }
+        },
+        {
+          "name": "减少购物车",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "authentication", "value": "{{userToken}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": { "mode": "raw", "raw": "{\n  \"dishId\": 46\n}" },
+            "url": {
+              "raw": "{{baseUrl}}/user/shoppingCart/sub",
+              "host": ["{{baseUrl}}"],
+              "path": ["user", "shoppingCart", "sub"]
+            }
+          }
+        },
+        {
+          "name": "查看购物车",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "authentication", "value": "{{userToken}}" }],
+            "url": {
+              "raw": "{{baseUrl}}/user/shoppingCart/list",
+              "host": ["{{baseUrl}}"],
+              "path": ["user", "shoppingCart", "list"]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
