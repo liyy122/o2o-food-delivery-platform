@@ -1,0 +1,26 @@
+* text=auto
+
+# 源码 / 文本
+*.java          text
+*.xml           text
+*.yml           text
+*.yaml          text
+*.properties    text
+*.md            text
+*.sql           text
+*.json          text
+*.js            text
+*.css           text
+*.html          text
+
+# 二进制
+*.png           binary
+*.jpg           binary
+*.jpeg          binary
+*.gif           binary
+*.ico           binary
+*.woff          binary
+*.woff2         binary
+*.ttf           binary
+*.mp3           binary
+*.xlsx          binary

@@ -19,6 +19,14 @@
 | 数据 | MySQL 8、Redis、Druid 连接池 |
 | 其他 | JWT 登录鉴权、阿里云 OSS 文件存储、微信登录与微信支付、POI 报表导出、WebSocket 来单提醒、Spring Task 定时任务 |
 
+## 文档
+
+| 文档 | 内容 |
+| --- | --- |
+| [docs/API.md](docs/API.md) | 71 个接口清单（管理端 / 用户端 / 支付回调），与代码同步 |
+| [docs/数据库设计.md](docs/数据库设计.md) | 11 张表的字段说明、表关联、订单状态、Redis 键 |
+| 在线接口文档 | 启动后访问 `http://localhost:8080/doc.html`（Knife4j，可直接调试） |
+
 ## 目录结构
 
 ```
@@ -37,7 +45,12 @@ sky-take-out-learning/
 │   ├── admin/                  管理端打包产物（Vue 编译后的静态文件）
 │   ├── nginx.conf              管理端 Nginx 配置示例（监听 8081）
 │   └── miniprogram/            用户端微信小程序源码
+├── docs/
+│   ├── API.md                  接口清单
+│   └── 数据库设计.md            表结构、关联关系、Redis 键
 ├── image/                      README 截图
+├── .github/workflows/build.yml GitHub Actions：JDK 8 + Maven 自动构建
+├── .gitattributes              换行符与二进制文件约定
 └── pom.xml                     Maven 父工程，聚合三个模块
 ```
 
