@@ -161,9 +161,8 @@ npm run build     # 构建，产物在 dist/
    - 模拟器调试：`http://localhost:8080`
    - 真机预览：`http://电脑局域网IP:8080`（手机和电脑要在同一个 Wi-Fi）
 3. 开发者工具右上角「详情 → 本地设置」勾选 **不校验合法域名、web-view（业务域名）、TLS 版本以及 HTTPS 证书**；
-4. 编译运行。`project.config.json` 里默认是 `touristappid`（游客模式，能打开但登录不了）；
-   要看登录/支付，把它换成自己的小程序 AppID，并把 AppID / AppSecret 填到后端 `sky.wechat.appid / secret`。
-   微信公众平台注册小程序后，在「开发管理 → 开发设置」里可以拿到 AppID 和 AppSecret。
+4. 编译运行。`project.config.json` 里已经填好本项目的小程序 AppID（`wx37b74b11b9fb2b1f`），换成自己的直接改这里。
+   登录/支付还需要把 AppID 和 AppSecret 填到后端 `sky.wechat.appid / secret`（`application-dev.yml` 已在 `.gitignore` 中，不会提交）。
 
 ## 默认账号
 
