@@ -1,7 +1,7 @@
 {
   "info": {
-    "name": "苍穹外卖 API",
-    "description": "苍穹外卖接口调试集合。先执行「管理端 / 员工登录」，脚本会自动把 token 写入集合变量；用户端接口需要从微信登录获取 token，手动填到 userToken 变量。",
+    "name": "餐饮 O2O 即时配送平台 API",
+    "description": "餐饮 O2O 即时配送平台 接口调试集合。先执行「管理端 / 员工登录」，脚本会自动把 token 写入集合变量；用户端接口需要从微信登录获取 token，手动填到 userToken 变量。",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
   "variable": [
