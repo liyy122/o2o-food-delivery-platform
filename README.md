@@ -5,9 +5,9 @@
 
 <div align="center">
   <img src="./image/1.png?v=20261121" width="800">
-  <p>管理端</p>
-  <img src="./image/2.png" width="800">
-  <p>用户端</p>
+  <p>管理端 · 工作台</p>
+  <img src="./image/2.png?v=20261121" width="800">
+  <p>管理端 · 数据统计</p>
 </div>
 
 ## 技术栈
