@@ -76,7 +76,7 @@ self.__precacheManifest = [
     "url": "img/404.a57b6f31.png"
   },
   {
-    "revision": "38b01728209c82713206be752ed54b3a",
+    "revision": "a1d30ce7b3ad966b33ca1a536532b352",
     "url": "img/icon_logo.38b01728.png"
   },
   {
@@ -88,7 +88,7 @@ self.__precacheManifest = [
     "url": "media/preview.3f1fe127.mp3"
   },
   {
-    "revision": "38b01728209c82713206be752ed54b3a",
+    "revision": "5fec207c10b636c8a16913e49fd2185f",
     "url": "img/logo.38b01728.png"
   },
   {
