@@ -1,7 +1,7 @@
-# 苍穹外卖（sky-take-out）
+# 餐饮 O2O 即时配送平台（o2o-food-delivery-platform）
 
-一个前后端分离的外卖点餐系统，包含**管理端**（商家后台）和**用户端**（微信小程序）两套界面，后端为 Spring Boot 单体应用。
-本项目基于黑马程序员《苍穹外卖》课程资料整理，保留了完整的后端代码、数据库脚本和前端产物，克隆后按下面的步骤即可在本地跑起来。
+一个前后端分离的餐饮 O2O 即时配送平台，包含**管理端**（商家后台）和**用户端**（微信小程序）两套界面，后端为 Spring Boot 单体应用。
+本项目在学习黑马程序员《苍穹外卖》课程的基础上整理，保留了完整的后端代码、数据库脚本和前端产物，克隆后按下面的步骤即可在本地跑起来。
 
 <div align="center">
   <img src="./image/1.png" width="800">
@@ -31,7 +31,7 @@
 ## 目录结构
 
 ```
-sky-take-out-learning/
+o2o-food-delivery-platform/
 ├── sky-common/                 公共模块：工具类、常量、异常、统一返回结果
 ├── sky-pojo/                   实体类：entity / dto / vo
 ├── sky-server/                 业务模块：controller / service / mapper / config / task / websocket
